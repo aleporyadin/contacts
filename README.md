@@ -1,17 +1,20 @@
 # Contacts Project Setup
 
-This project involves interacting with the Nimble API to update and manage contacts, as well as providing a search feature through a Flask web application. The project uses PostgreSQL as the database and Celery for periodic updates.
+This project involves interacting with the Nimble API to update and manage contacts, as well as providing a search
+feature through a Flask web application. The project uses PostgreSQL as the database and Celery for periodic updates.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Components](#components)
-  - [api.py](#apipy)
-  - [app.py](#apppy)
-  - [database.py](#databasepy)
-  - [import_csv.py](#import_csvpy)
-  - [tasks.py](#taskspy)
-
+    - [api.py](#apipy)
+    - [app.py](#apppy)
+    - [database.py](#databasepy)
+    - [import_csv.py](#import_csvpy)
+    - [tasks.py](#taskspy)
+    - [TestCase.py](#testcasepy)
+    - [404.html](#404html)
+    - [style.css](#stylecss)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Credits](#credits)
@@ -30,24 +33,40 @@ Before you start, make sure you have the following requirements installed:
 
 ### `api.py`
 
-This module handles interactions with the Nimble API. It fetches contact data and updates the local database. Make sure to set the `NIMBLE_API_KEY` and `API_NIMBLE_URL` environment variables in the `.env` file.
+This module handles interactions with the Nimble API. It fetches contact data and updates the local database. Make sure
+to set the `NIMBLE_API_KEY` and `API_NIMBLE_URL` environment variables in the `.env` file.
 
 ### `app.py`
 
-The Flask web application provides an API endpoint `/search` to search for contacts based on a query string. It communicates with the database to retrieve search results.
+The Flask web application provides an API endpoint `/search` to search for contacts based on a query string. It
+communicates with the database to retrieve search results.
 
 ### `database.py`
 
-This module manages the PostgreSQL database connection. It includes functions to create a database cursor and retrieve contacts based on a search query.
+This module manages the PostgreSQL database connection. It includes functions to create a database cursor and retrieve
+contacts based on a search query.
 
 ### `import_csv.py`
 
-This script allows you to import contacts from a CSV file into the database. The CSV file should contain columns for `first_name`, `last_name`, and `email`.
+This script allows you to import contacts from a CSV file into the database. The CSV file should contain columns
+for `first_name`, `last_name`, and `email`.
 
 ### `tasks.py`
 
-Celery tasks are defined in this module. It includes a task to periodically update contacts from the Nimble API. The schedule for updates is configured in the `beat_schedule` dictionary.
+Celery tasks are defined in this module. It includes a task to periodically update contacts from the Nimble API. The
+schedule for updates is configured in the `beat_schedule` dictionary.
 
+### `TestCase.py`
+
+Simple test case for project
+
+### `404.html`
+
+Template for users, if url patter get unknown url, you see it =) ?
+
+### `style.css`
+
+Simple css file for styling 404.html
 
 ## Setup
 
@@ -90,8 +109,8 @@ Celery tasks are defined in this module. It includes a task to periodically upda
 
 6. Configure environment variables:
 
-    Create a `.env` file in the project root and add the following contents,
-    *replacing values USER(postgres) and password(Aa11!!az) *:
+   Create a `.env` file in the project root and add the following contents,
+   *replacing values USER(postgres) and password(Aa11!!az) *:
 
     ```env
     DATABASE_URL=postgresql://postgres:Aa11!!az@localhost/contacts
@@ -106,7 +125,7 @@ Celery tasks are defined in this module. It includes a task to periodically upda
     python app.py
     ```
 
-    The application will start and serve at `http://127.0.0.1:5000`.
+   The application will start and serve at `http://127.0.0.1:5000`.
 
 8. Run Celery for periodic contact updates:
 
@@ -115,18 +134,19 @@ Celery tasks are defined in this module. It includes a task to periodically upda
     celery -A tasks worker --loglevel=info
     ```
 
-    Celery will fetch and update contacts every minute (adjust the schedule in `tasks.py` as needed).
+   Celery will fetch and update contacts every minute (adjust the schedule in `tasks.py` as needed).
 
 ## Usage
 
-- Access the web application at `http://127.0.0.1:5000` to search for contacts using the `/search` endpoint. 
-For search example name Alex, need use like it: `http://127.0.0.1:5000/search?q=Alex`
+- Access the web application at `http://127.0.0.1:5000` to search for contacts using the `/search` endpoint.
+  For search example name Alex, need use like it: `http://127.0.0.1:5000/search?q=Alex`
 
 - To import contacts from a CSV file(file must be in root folder project), use `import_csv.py`:
 
     ```bash
     python import_csv.py
     ```
+- If you want to run tests can use: `python -m unittest tests/TestCase.py`
 
 ## Credits
 
