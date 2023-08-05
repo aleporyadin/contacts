@@ -1,0 +1,40 @@
+# Compiled Python files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Local settings
+settings.ini
+
+# PyCharm settings
+.idea/
+*.iml
+
+# Compiled bytecode
+*.pyc
+
+# Temporary files
+*.tmp
+
+# Celery beat schedule file
+celerybeat-schedule
+
+# Compiled executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# macOS metadata
+.DS_Store
+
+# Ubuntu trash folder
+.Trash-*
